@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRasta.Caching", "OpenRasta.Caching\OpenRasta.Caching.csproj", "{A0E50C0B-9241-4441-8DEF-960A55004257}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{4BFE54DE-7F3F-410C-8902-C4DB1C5FA7F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenWrap", "OpenWrap", "{69BD7A27-837E-4A60-94A6-58B42DADE774}"
+	ProjectSection(SolutionItems) = preProject
+		..\openrasta-caching.tests.wrapdesc = ..\openrasta-caching.tests.wrapdesc
+		..\openrasta-caching.wrapdesc = ..\openrasta-caching.wrapdesc
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0E50C0B-9241-4441-8DEF-960A55004257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E50C0B-9241-4441-8DEF-960A55004257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E50C0B-9241-4441-8DEF-960A55004257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E50C0B-9241-4441-8DEF-960A55004257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BFE54DE-7F3F-410C-8902-C4DB1C5FA7F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BFE54DE-7F3F-410C-8902-C4DB1C5FA7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BFE54DE-7F3F-410C-8902-C4DB1C5FA7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BFE54DE-7F3F-410C-8902-C4DB1C5FA7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+		OpenWrap.VisualStudioIntegration2010 = 1;Ensures OpenWrap initialization when a solution is opened.;OpenWrap Visual Studio Solution Add-in
+	EndGlobalSection
+EndGlobal

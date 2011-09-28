@@ -1,0 +1,4 @@
+﻿name: openrasta-caching
+depends: openwrap anchored content
+depends: openrasta-core
+directory-structure: src\{scope: Tests=tests}
