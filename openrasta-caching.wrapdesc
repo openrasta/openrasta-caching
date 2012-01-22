@@ -1,4 +1,5 @@
 ﻿name: openrasta-caching
+title: OpenRasta Caching Support
 depends: openwrap anchored content
 depends: openrasta-core
 directory-structure: src\{scope: Tests=tests}
