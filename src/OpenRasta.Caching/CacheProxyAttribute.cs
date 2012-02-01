@@ -6,8 +6,16 @@ namespace OpenRasta.Caching
     {
         public CacheProxyAttribute()
         {
+            Level = ProxyCacheLevel.Default;
         }
 
-        public static readonly CacheProxyAttribute Default = new CacheProxyAttribute();
+        public ProxyCacheLevel Level { get; set; }
+    }
+
+    public enum ProxyCacheLevel
+    {
+        Default,
+        Everything,
+        None
     }
 }

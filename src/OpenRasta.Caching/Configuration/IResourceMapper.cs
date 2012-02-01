@@ -5,6 +5,8 @@ namespace OpenRasta.Caching.Configuration
 {
     public interface IResourceMapper<T> : IResource
     {
-        ResourceMapper<T> LastModified(Func<T,DateTimeOffset?> reader);
+        IResourceMapper<T> LastModified(Func<T,DateTimeOffset?> reader);
+        IResourceMapper<T> Etag(Func<T, string> reader);
+        IResourceMapper<T> Expires(Func<T, TimeSpan> reader);
     }
 }

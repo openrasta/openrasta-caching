@@ -16,12 +16,9 @@ namespace Tests.last_modified
             // is later than the server's time of message origination (Date).
             given_time(now);
 
-            given_resource(
-                "/resource",
-                resource=>resource.Map<ResourceWithLastModified>().LastModified(_=> now + TimeSpan.FromMinutes(1)),
-                new ResourceWithLastModified { LastModified = now });
+            given_resource<TestResource>(map=>map.LastModified(_=> now + TimeSpan.FromMinutes(1)));
 
-            when_executing_request("/resource");
+            when_executing_request("/TestResource");
         }
 
         [Test]

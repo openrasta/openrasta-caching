@@ -29,11 +29,21 @@ namespace OpenRasta.Caching.Configuration
         {
             get { return _resource.Resource; }
         }
-        public ResourceMapper<T> LastModified(Func<T,DateTimeOffset?> reader)
+        public IResourceMapper<T> LastModified(Func<T,DateTimeOffset?> reader)
         {
-            Func<object, DateTimeOffset?> untyped = resource => reader((T)resource);
+            _resource.Resource.SetLastModifiedMapper(resource=>reader((T)resource));
+            return this;
+        }
 
-            _resource.Resource.Properties[Keys.LAST_MODIFIED] = untyped;
+        public IResourceMapper<T> Etag(Func<T, string> reader)
+        {
+            _resource.Resource.SetEtagMapper(resource=>reader((T)resource));
+            return this;
+        }
+
+        public IResourceMapper<T> Expires(Func<T, TimeSpan> reader)
+        {
+            _resource.Resource.SetExpires(resource=>reader((T)resource));
             return this;
         }
     }

@@ -40,26 +40,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="attributes\proxy\max_age.cs" />
+    <Compile Include="attributes\proxy\max_age_no_store.cs" />
+    <Compile Include="attributes\proxy\no_store.cs" />
+    <Compile Include="attributes\proxy\revalidate.cs" />
+    <Compile Include="conditionals\if_modified_since\Copy of unmodified.cs" />
+    <Compile Include="conditionals\matching.cs" />
     <Compile Include="contexts\attributes.cs" />
-    <Compile Include="attributes\proxy\proxy_instruction.cs" />
+    <Compile Include="attributes\proxy\empty.cs" />
     <Compile Include="contexts\caching.cs" />
+    <Compile Include="conditionals\if_match\matching.cs" />
+    <Compile Include="conditionals\if_match\not_matching.cs" />
+    <Compile Include="conditionals\if_none_match\matching.cs" />
+    <Compile Include="conditionals\if_none_match\not_matching.cs" />
+    <Compile Include="contexts\TestConfiguration.cs" />
+    <Compile Include="etag\valid.cs" />
     <Compile Include="extensions.cs" />
     <Compile Include="last_modified\already_set.cs" />
-    <Compile Include="last_modified\conditional\modified.cs" />
-    <Compile Include="last_modified\conditional\unmodified.cs" />
-    <Compile Include="last_modified\conditional\with_incompatible_request.cs" />
+    <Compile Include="conditionals\if_modified_since\already_set.cs" />
+    <Compile Include="conditionals\if_modified_since\invalid_value.cs" />
+    <Compile Include="conditionals\if_modified_since\unmodified.cs" />
+    <Compile Include="conditionals\if_modified_since\invalid_header_combination.cs" />
     <Compile Include="last_modified\in_future.cs" />
     <Compile Include="last_modified\null.cs" />
     <Compile Include="last_modified\not_mapped.cs" />
-    <Compile Include="last_modified\valid_value.cs" />
+    <Compile Include="last_modified\valid.cs" />
     <Compile Include="last_modified\ResourceWithLastModified.cs" />
     <Compile Include="NullCodec.cs" />
     <Compile Include="response_cache_control\handler_attribute\CachingHandler.cs" />
+    <Compile Include="response_cache_control\handler_attribute\browser_attribute_with_max_age.cs" />
     <Compile Include="response_cache_control\handler_attribute\not_set.cs" />
     <Compile Include="response_cache_control\handler_attribute\proxy_attribute_with_max_age.cs" />
     <Compile Include="response_cache_control\handler_attribute\Resource.cs" />
     <Compile Include="response_cache_control\mapping\on_resource_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestExtensions.cs" />
+    <Compile Include="TestResource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenRasta.Caching\OpenRasta.Caching.csproj">

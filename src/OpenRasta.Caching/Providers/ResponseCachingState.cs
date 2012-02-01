@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OpenRasta.OperationModel;
 
 namespace OpenRasta.Caching.Providers
 {
     public class ResponseCachingState
     {
-        public ResponseCachingState()
+        public ResponseCachingState(IEnumerable<string> directives = null)
         {
-            CacheDirectives = new List<string>();
+            CacheDirectives = directives != null ? directives.ToList() : new List<string>();
         }
         public TimeSpan? LocalCacheMaxAge { get; set; }
         public bool LocalCacheEnabled { get; set; }

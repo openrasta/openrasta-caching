@@ -52,23 +52,25 @@ namespace Tests.contexts
             _requestHeaders[header] = value.Value.ToUniversalTime().ToString("R");
         }
 
-        protected void given_resource<T>(string uri, Action<IResource> configuration, T resource)
+        protected void given_resource<T>(Action<IResourceMapper<T>> configuration = null, string uri = null, T resource = null)
+            where T:class,new()
         {
             Action action = () =>
             {
-                IResourceDefinition res = ResourceSpace.Has.ResourcesOfType<T>();
-                if (configuration != null) configuration(res);
-                res.AtUri(uri)
+                IResourceDefinition<T> res = ResourceSpace.Has.ResourcesOfType<T>();
+                if (configuration != null) configuration(res.Map());
+                res.AtUri(uri ?? "/" + typeof(T).Name)
                     .HandledBy<ResourceHandler>()
                     .TranscodedBy<NullCodec>();
             };
             _configuration.Has.Add(action);
-            this.resource = resource;
+            this.resource = resource ?? new T();
         }
 
         protected void given_resource<T>(string uri, T resource)
+            where T : class,new()
         {
-            given_resource(uri, null, resource);
+            given_resource(null,uri, resource);
         }
 
         protected void given_time(DateTimeOffset? dateTimeOffset)
@@ -116,20 +118,10 @@ namespace Tests.contexts
                 return test.resource;
             }
         }
-    }
 
-    public class TestConfiguration : IConfigurationSource
-    {
-        public List<Action> Has = new List<Action>();
-        public List<Action> Uses = new List<Action>();
-
-        public void Configure()
+        protected void given_current_time(DateTimeOffset? dateTimeOffset)
         {
-            using (OpenRastaConfiguration.Manual)
-            {
-                Uses.ForEach(x => x());
-                Has.ForEach(x => x());
-            }
+            now = dateTimeOffset;
         }
     }
 }

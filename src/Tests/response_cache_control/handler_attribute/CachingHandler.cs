@@ -11,8 +11,13 @@ namespace Tests.response_cache_control.handler_attribute
         {
             return new Resource();
         }
-        [HttpOperation(ForUriName = "ProxyCached"), CacheProxy(MaxAge = "01:00:00")]
+        [HttpOperation(ForUriName = "CacheProxy"), CacheProxy(MaxAge = "01:00:00")]
         public Resource GetProxyCached()
+        {
+            return GetProxyCachedMethod();
+        }
+        [HttpOperation(ForUriName = "CacheBrowser"), CacheBrowser(MaxAge = "01:00:00")]
+        public Resource GetCacheBrowserMaxAge()
         {
             return GetProxyCachedMethod();
         }

@@ -6,11 +6,14 @@ using OpenRasta.Testing;
 
 namespace Tests.response_cache_control.handler_attribute
 {
-    public class proxy_attribute_with_max_age : contexts.caching
+    public class browser_attribute_with_max_age : contexts.caching
     {
-        public proxy_attribute_with_max_age()
+        public browser_attribute_with_max_age()
         {
-            given_has(_ => _.ResourcesOfType<Resource>().AtUri("/").Named("CacheProxy").HandledBy<CachingHandler>().AsJsonDataContract().ForMediaType("*/*"));
+            given_has(_ => _.ResourcesOfType<Resource>()
+                            .AtUri("/").Named("CacheBrowser")
+                            .HandledBy<CachingHandler>()
+                            .AsJsonDataContract().ForMediaType("*/*"));
             when_executing_request("/");
         }
 
@@ -23,8 +26,7 @@ namespace Tests.response_cache_control.handler_attribute
         [Test]
         public void cache_header_present()
         {
-            response.Headers["cache-control"].ShouldBe("max-age=3600");
+            response.Headers["cache-control"].ShouldBe("private, max-age=3600");
         }
-
     }
 }

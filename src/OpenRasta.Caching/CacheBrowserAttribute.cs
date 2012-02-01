@@ -5,8 +5,14 @@ namespace OpenRasta.Caching
     public class CacheBrowserAttribute : AbstractCacheAttribute
     {
         public CacheBrowserAttribute()
-        {
-            throw new NotImplementedException("Please use CacheProxyAttribute for now.");            
+        {        
         }
+
+        public BrowserCacheLevel Level { get; set; }
+    }
+    public enum BrowserCacheLevel
+    {
+        Default,
+        None
     }
 }

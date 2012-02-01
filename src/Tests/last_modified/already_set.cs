@@ -7,6 +7,7 @@ using OpenRasta.Configuration;
 using OpenRasta.Pipeline;
 using OpenRasta.Testing;
 using OpenRasta.Web;
+using Tests.last_modified.conditional;
 
 namespace Tests.last_modified
 {
@@ -19,13 +20,10 @@ namespace Tests.last_modified
             // An origin server with a clock MUST NOT send a Last-Modified date that
             // is later than the server's time of message origination (Date).
             given_time(now);
-            given_uses(_ => _.PipelineContributor<LastModifierSetter>());
-            given_resource(
-                "/resource",
-                resource=>resource.Map<ResourceWithLastModified>().LastModified(_=> _.LastModified),
-                new ResourceWithLastModified { LastModified = now });
-            
-            when_executing_request("/resource");
+            given_uses(_ => _.PipelineContributor<LastModifiedInPast>());
+            given_resource<TestResource>(map => map.LastModified(_=>now));
+
+            when_executing_request("/TestResource");
         }
 
         [Test]
@@ -37,23 +35,12 @@ namespace Tests.last_modified
         [Test]
         public void last_modified_header_not_overridden()
         {
-
             DateTimeOffset.Parse(response.Headers["last-modified"])
                 .ShouldNotBe(now.Value);
         }
-        class LastModifierSetter : IPipelineContributor
+        class LastModifiedInPast : HeaderSetter
         {
-            public void Initialize(IPipeline pipelineRunner)
-            {
-                pipelineRunner.Notify(WriteLastModified)
-                    .After<KnownStages.IOperationExecution>().And.Before<LastModifiedContributor>();
-            }
-
-            PipelineContinuation WriteLastModified(ICommunicationContext arg)
-            {
-                arg.Response.Headers["last-modified"] = (ServerClock.UtcNow() - TimeSpan.FromSeconds(10)).ToString("R");
-                return PipelineContinuation.Continue;
-            }
+            public LastModifiedInPast() : base("last-modified", (ServerClock.UtcNow() - TimeSpan.FromSeconds(10)).ToString("R")) { }
         }
     }
 }

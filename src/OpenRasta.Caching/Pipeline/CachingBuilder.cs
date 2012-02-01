@@ -23,16 +23,23 @@ namespace OpenRasta.Caching.Pipeline
                                                         typeof(IOperationInterceptor),
                                                         typeof(CachingInterceptor),
                                                         DependencyLifetime.Transient));
-            uses.Repository.CustomRegistrations.Add(new DependencyRegistrationModel(
-                                                        typeof(IPipelineContributor),
-                                                        typeof(CachingContributor),
-                                                        DependencyLifetime.Transient));
-            uses.Repository.CustomRegistrations.Add(new DependencyRegistrationModel(
-                                                        typeof(IPipelineContributor),
-                                                        typeof(LastModifiedContributor),
-                                                        DependencyLifetime.Transient));
+
+            RegisterContributor<CachingContributor>(uses);
+            RegisterContributor<ConditionalEtagContributor>(uses);
+            RegisterContributor<ConditionalLastModifiedContributor>(uses);
+            RegisterContributor<EntityEtagContributor>(uses);
+            RegisterContributor<EntityLastModified>(uses);
             uses.Repository.CustomRegistrations.Add(_conf);
         }
+
+        static void RegisterContributor<T>(IFluentTarget uses) where T:IPipelineContributor
+        {
+            uses.Repository.CustomRegistrations.Add(new DependencyRegistrationModel(
+                                                        typeof(IPipelineContributor),
+                                                        typeof(T),
+                                                        DependencyLifetime.Transient));
+        }
+
         public CachingBuilder Auto()
         {
             _conf.Automatic = true;

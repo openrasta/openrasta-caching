@@ -9,6 +9,10 @@ namespace OpenRasta.Caching.Configuration
         {
             return new CachingBuilder((IFluentTarget)uses);
         }
+        public static IResourceMapper<T> Map<T>(this IResource<T> resource)
+        {
+            return new ResourceMapper<T>(resource);
+        }
         public static IResourceMapper<T> Map<T>(this IResource resource)
         {
             return new ResourceMapper<T>(resource);

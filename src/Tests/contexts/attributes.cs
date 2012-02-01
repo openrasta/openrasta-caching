@@ -6,21 +6,28 @@ namespace Tests.contexts
 {
     public class attributes
     {
-        CacheProxyAttribute _cacheProxyAttrib;
+        CacheProxyAttribute _proxy;
         protected ResponseCachingState cache;
         protected Exception exception;
+        CacheServerAttribute _server;
+        CacheBrowserAttribute _browser;
 
-        protected void given_attribute(CacheProxyAttribute cacheProxyAttribute)
+        protected void given_attribute(
+            CacheBrowserAttribute browser = null,
+            CacheProxyAttribute proxy = null,
+            CacheServerAttribute server = null)
         {
-            _cacheProxyAttrib = cacheProxyAttribute;
+            _browser = browser;
+            _proxy = proxy;
+            _server = server;
         }
         protected void when_getting_response_caching()
         {
             try
             {
-                cache = CacheResponse.GetResponseDirective(_cacheProxyAttrib);
+                cache = CacheResponse.GetResponseDirective(_proxy, _browser, _server);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 exception = e;
             }
